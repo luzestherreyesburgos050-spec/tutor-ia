@@ -1,4 +1,4 @@
-       <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -15,41 +15,51 @@
         button { width: 100%; padding: 14px; background: #38bdf8; color: #0f172a; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: 0.2s; }
         button:hover { background: #7dd3fc; }
         #error { color: #f87171; margin-top: 12px; font-size: 0.95rem; display: none; font-weight: 500; }
-        #zona-ia { display: none; width: 100%; height: 100vh; flex-direction: column; }
-        iframe { width: 100%; height: 100%; border: none; background: white; }
+        #coze-chat-container { width: 100%; height: 100vh; display: none; }
     </style>
+    <!-- Cargamos el componente oficial de Coze -->
+    <script src="https://coze.com"></script>
 </head>
 <body>
 
     <!-- PANTALLA DE LOGEO -->
     <div id="bloqueo">
-        <h2>?? Acceso al Tutor</h2>
-        <p>Introduce el cÛdigo ˙nico que le compraste a tu proveedor para activar la Inteligencia Artificial.</p>
-        <input type="text" id="pin-usuario" placeholder="Escribe tu cÛdigo aquÌ" autocomplete="off">
+        <h2>üîë Acceso al Tutor</h2>
+        <p>Introduce el c√≥digo √∫nico que le compraste a tu proveedor para activar la Inteligencia Artificial.</p>
+        <input type="text" id="pin-usuario" placeholder="Escribe tu c√≥digo aqu√≠" autocomplete="off">
         <button onclick="validar()">Desbloquear IA</button>
-        <p id="error">? CÛdigo inv·lido. Verifica o pide uno nuevo.</p>
+        <p id="error">‚ùå C√≥digo inv√°lido. Verifica o pide uno nuevo.</p>
     </div>
 
-    <!-- PANTALLA DONDE APARECE LA IA -->
-    <div id="zona-ia">
-        <!-- Puedes cambiar la direcciÛn de abajo por el enlace de tu bot de Coze -->
-        <https://www.coze.com/store/agent/7701032524495044613?from=bots_card&bid=6lnpavs70901l>
-    </div>
+    <!-- AQU√ç SE PINTAR√Å EL CHAT DE COZE EN PANTALLA COMPLETA -->
+    <div id="coze-chat-container"></div>
 
     <script>
-        // AQUÕ INVENTAS LOS C”DIGOS QUE VAS A VENDER. 
-        // Cambia estos ejemplos por los cÛdigos secretos que t˙ quieras usar.
+        // Tus c√≥digos v√°lidos
         const misCodigosSecretos = ["TAREA_PRO_1", "CHAYITO_2026", "PIN_SECRETO_99", "ESTUDIANTE_VIP"];
+
+        // Funci√≥n oficial de Coze para activar la IA en la pantalla
+        function cargarChatIA() {
+            document.getElementById("coze-chat-container").style.display = "block";
+            new CozeWebChat.ChatSlot({ 
+                    config: {
+                        bot_id: '7701032524495044613',                            
+                 },
+                componentProps: {
+                    title: 'Tutor Inteligente Pro',
+                },
+                el: document.getElementById('coze-chat-container'),
+            });
+        }
 
         function validar() {
             const input = document.getElementById("pin-usuario").value.trim().toUpperCase();
             const error = document.getElementById("error");
             const pantallaLogin = document.getElementById("bloqueo");
-            const pantallaIa = document.getElementById("zona-ia");
 
             if (misCodigosSecretos.includes(input)) {
                 pantallaLogin.style.display = "none";
-                pantallaIa.style.display = "flex";
+                cargarChatIA(); // Activa el chat oficial
             } else {
                 error.style.display = "block";
                 document.getElementById("pin-usuario").value = "";
