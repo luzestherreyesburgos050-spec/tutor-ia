@@ -17,7 +17,7 @@
         #error { color: #f87171; margin-top: 12px; font-size: 0.95rem; display: none; font-weight: 500; }
         #coze-chat-container { width: 100%; height: 100vh; display: none; }
     </style>
-    <!-- Cargamos el componente oficial de Coze -->
+    <!-- Cargamos el componente oficial de Coze con sus etiquetas correctas -->
     <script src="https://coze.com"></script>
 </head>
 <body>
@@ -31,20 +31,19 @@
         <p id="error">❌ Código inválido. Verifica o pide uno nuevo.</p>
     </div>
 
-    <!-- AQUÍ SE PINTARÁ EL CHAT DE COZE EN PANTALLA COMPLETA -->
+    <!-- AQUÍ SE PINTARÁ EL CHAT DE COZE -->
     <div id="coze-chat-container"></div>
 
+    <!-- AQUÍ INICIA LA PROGRAMACIÓN CON LOS SIGNOS CORRECTOS -->
     <script>
-        // Tus códigos válidos
         const misCodigosSecretos = ["TAREA_PRO_1", "CHAYITO_2026", "PIN_SECRETO_99", "ESTUDIANTE_VIP"];
 
-        // Función oficial de Coze para activar la IA en la pantalla
         function cargarChatIA() {
             document.getElementById("coze-chat-container").style.display = "block";
-            new CozeWebChat.ChatSlot({ 
-                    config: {
-                        bot_id: '7701032524495044613',                            
-                 },
+            new CozeWebChat.ChatSlot({
+                config: {
+                    bot_id: '7701032524495044613', 
+                },
                 componentProps: {
                     title: 'Tutor Inteligente Pro',
                 },
@@ -59,7 +58,7 @@
 
             if (misCodigosSecretos.includes(input)) {
                 pantallaLogin.style.display = "none";
-                cargarChatIA(); // Activa el chat oficial
+                cargarChatIA();
             } else {
                 error.style.display = "block";
                 document.getElementById("pin-usuario").value = "";
